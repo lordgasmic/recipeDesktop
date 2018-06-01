@@ -1,0 +1,24 @@
+body {
+	background-color: white;
+}
+
+div.row {
+	display: block;
+}
+
+div.number {
+	display: inline-block;
+	text-align: right;
+	width: 53px;
+}
+
+div.occurance {
+	display: inline-block;
+	text-align: left;
+}
+
+div.input {
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+}
