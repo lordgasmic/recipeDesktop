@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lordgasmic.recipe.db.persistence.Recipe;
 import com.lordgasmic.recipe.dto.RecipeDto;
@@ -20,29 +19,32 @@ import com.lordgasmic.recipe.dto.RecipeDto;
 @Controller
 public class RecipeController {
 
-    @Autowired
-    private RecipeService recipeService;
+	@Autowired
+	private RecipeService recipeService;
 
-    @RequestMapping("/recipe")
-    public String recipe(final Model model) {
-        final Recipe recipe = recipeService.getRecipe();
-        model.addAttribute("recipe", recipe);
-        return "recipe";
-    }
-    
-    @GetMapping("/addRecipe")
-    public String addRecipe() {
-    	return "addRecipe";
-    }
-    
-    @PostMapping("/postRecipe")
-	public String postRecipe(@Valid @ModelAttribute("recipeDto") RecipeDto recipeDto, BindingResult result, ModelMap model) {
-    	model.addAttribute("recipe", recipeDto);
-    	return "recipe";
-    }
+	@RequestMapping("/recipe")
+	public String recipe(final Model model) {
+		final Recipe recipe = recipeService.getRecipe();
+		model.addAttribute("recipe", recipe);
+		return "recipe";
+	}
 
-    @GetMapping("/derp/{derpId}")
-	public String derp(@PathVariable("derpId") Integer derpId, Model model) {
+	@GetMapping("/recipe/add")
+	public String addRecipe(@Valid @ModelAttribute("recipeDto") final RecipeDto recipeDto, final BindingResult result,
+			final ModelMap model) {
+		return "addRecipe";
+	}
+
+	@PostMapping("/recipe/add")
+	public String postRecipe(@Valid @ModelAttribute("recipeDto") final RecipeDto recipeDto, final BindingResult result,
+			final ModelMap model) {
+		final Recipe recipe = recipeService.save(Recipe.buildRecipe(recipeDto));
+		model.addAttribute("recipe", recipe);
+		return "recipe";
+	}
+
+	@GetMapping("/derp/{derpId}")
+	public String derp(@PathVariable("derpId") final Integer derpId, final Model model) {
 		model.addAttribute("derpId", derpId);
 		return "derp";
 	}

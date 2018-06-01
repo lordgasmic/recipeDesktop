@@ -5,8 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.lordgasmic.recipe.dto.RecipeDto;
 
 import lombok.Data;
 
@@ -18,9 +21,9 @@ public class Recipe implements Serializable {
     private static final long serialVersionUID = -7297882184964546493L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -28,4 +31,12 @@ public class Recipe implements Serializable {
     @Column(name = "description")
     private String description;
 
+    public static Recipe buildRecipe(RecipeDto dto) {
+    	Recipe recipe = new Recipe();
+    	
+    	recipe.setName(dto.getName());
+    	recipe.setDescription(dto.getDescription());
+    	
+    	return recipe;
+    }
 }

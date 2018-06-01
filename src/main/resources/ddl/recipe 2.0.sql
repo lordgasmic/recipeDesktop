@@ -10,7 +10,6 @@ drop table if exists quantity;
 drop table if exists uom;
 drop table if exists item;
 
-
 create table item (
     id int not null auto_increment,
     name nvarchar(255) not null unique,

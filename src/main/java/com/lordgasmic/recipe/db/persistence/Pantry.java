@@ -18,7 +18,7 @@ public class Pantry implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "item_id")
     private String itemId;

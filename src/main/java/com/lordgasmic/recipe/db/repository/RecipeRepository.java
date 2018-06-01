@@ -9,11 +9,15 @@ import com.lordgasmic.recipe.db.persistence.Recipe;
  */
 public interface RecipeRepository extends Repository<Recipe, String> {
 
-    /**
-     * Get the draw from the provided id.
-     * 
-     * @param id
-     * @return The Draw
-     */
+	/**
+	 * Get the recipe from the provided id.
+	 *
+	 * @param id
+	 * @return The Recipe
+	 */
 	Recipe findById(String id);
+
+	Recipe save(Recipe recipe);
+
+	Iterable<Recipe> findAll();
 }
